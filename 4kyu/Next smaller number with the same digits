@@ -1,0 +1,42 @@
+int comp(const int *a,const int *b){
+   return *a - *b;
+}
+
+
+long long next_smaller_number(unsigned long long n){
+   long long result;
+   int a[20];
+   int i,j,k,size=20, buf,flag=0;
+   unsigned long long m=n;
+   for (i=0;i<20;i++){
+      a[i]=m%10;
+      m/=10;
+   }
+
+   for (i=19;i>=0;i--){
+      if (a[i]){
+         size=i+1;
+         break;
+      }  
+   }
+
+   for (i=0,flag=1,result=0; i<size-1 && flag; i++){
+      for(j=i+1; j<size && flag; j++){
+         if (a[i]==a[j]) break;
+         if (a[j]>a[i]&&!(a[i]==0 && j==size-1)){
+               buf = a[j];
+               a[j]=a[i];
+               a[i]=buf;
+               flag=0;
+               qsort(&a[0],j,sizeof(int),(int(*) (const void *, const void *)) comp);
+               for (k=size-1;k>=0;k--){
+                  result+=a[k];
+                  result*=10;
+               }
+               result/=10;
+               return result;  
+         }
+      }
+   }
+   return -1;
+}
