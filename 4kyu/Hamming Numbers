@@ -1,0 +1,37 @@
+#include <stdint.h>
+
+uint64_t hamber(int n)
+{
+    uint64_t hammingNumbers[n];
+    hammingNumbers[0] = 1; // The first smallest Hamming number is 1
+
+    // Initialize the indices for 2, 3, and 5
+    int i = 0, j = 0, k = 0;
+
+    for (int count = 1; count < n; count++) {
+        // Calculate the next smallest Hamming number
+        uint64_t nextHammingNumber = hammingNumbers[i] * 2; // Multiply by 2
+        uint64_t nextHammingNumber3 = hammingNumbers[j] * 3; // Multiply by 3
+        uint64_t nextHammingNumber5 = hammingNumbers[k] * 5; // Multiply by 5
+
+        // Find the smallest among the three calculated numbers
+        uint64_t smallestHammingNumber = nextHammingNumber < nextHammingNumber3 ? nextHammingNumber : nextHammingNumber3;
+        smallestHammingNumber = smallestHammingNumber < nextHammingNumber5 ? smallestHammingNumber : nextHammingNumber5;
+
+        // Store the smallest Hamming number
+        hammingNumbers[count] = smallestHammingNumber;
+
+        // Increment the indices accordingly
+        if (smallestHammingNumber == nextHammingNumber) {
+            i++;
+        }
+        if (smallestHammingNumber == nextHammingNumber3) {
+            j++;
+        }
+        if (smallestHammingNumber == nextHammingNumber5) {
+            k++;
+        }
+    }
+
+    return hammingNumbers[n - 1];
+}
