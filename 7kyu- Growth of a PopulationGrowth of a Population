@@ -1,0 +1,10 @@
+int nbYear(int p0, double percent, int aug, int p) {
+  percent /= 100;
+  int count = 0;
+  do{
+    p0 += (p0 * percent) + aug;
+    count++;
+  }
+  while (p0 < p);
+  return count;
+}
