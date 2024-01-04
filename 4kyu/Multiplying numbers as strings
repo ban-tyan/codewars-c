@@ -1,0 +1,41 @@
+#include <stdlib.h>
+#include <string.h>
+
+char *multiply(const char *a, const char *b) {
+  
+if (strcmp(a, "0") == 0 || strcmp(b, "0") == 0) {
+        char *result = (char *)malloc(2 * sizeof(char));
+        strcpy(result, "0");
+        return result;
+    }
+
+int lenA = strlen(a);
+int lenB = strlen(b);
+
+int resultLen = lenA + lenB + 1;
+char *result = (char *)malloc(resultLen * sizeof(char));
+memset(result, '0', resultLen); 
+
+for (int i = lenA - 1; i >= 0; i--) {
+    for (int j = lenB - 1; j >= 0; j--) {
+        int product = (a[i] - '0') * (b[j] - '0');
+        int sum = (result[i + j + 1] - '0') + product;
+
+        result[i + j + 1] = (sum % 10) + '0'; 
+        result[i + j] += sum / 10; 
+    }
+}
+
+int startIndex = 0;
+while (startIndex < resultLen - 1 && result[startIndex] == '0') {
+    startIndex++;
+}
+
+if (startIndex > 0) {
+    memmove(result, result + startIndex, resultLen - startIndex);
+}
+
+result[resultLen - startIndex - 1] = '\0';
+
+return result;
+}
