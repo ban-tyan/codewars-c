@@ -1,0 +1,15 @@
+#include <stdbool.h>
+
+bool scramble(const char *str1, const char *str2) {
+    int counter[26] = {0};
+
+    for (int i = 0; str1[i] != '\0'; ++i) {
+        counter[str1[i] - 'a']++;
+    }
+
+    for (int j = 0; str2[j] != '\0'; ++j) {
+        if (counter[str2[j] - 'a'] == 0) return false;
+        counter[str2[j] - 'a']--;
+    }
+    return true;
+}
