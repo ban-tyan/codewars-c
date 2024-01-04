@@ -1,0 +1,7 @@
+#include <stdio.h>
+
+float opposite(float num);
+
+float opposite(float num) {
+    return -num;
+}
