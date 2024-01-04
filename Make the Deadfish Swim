@@ -1,0 +1,27 @@
+#include <stddef.h>
+#include <string.h>
+ 
+int *parse (const char *program)
+{
+  int count = 0, size_arr = 0;
+  int *res = NULL;
+    for (int i=0; i < (int)strlen(program); i++){
+    switch (program[i]){
+        case 'i': 
+          count++;
+          break;
+        case 'd':
+          count--;
+          break;
+        case 's':
+          count *= count;
+          break;
+        case 'o':
+          size_arr++;
+          res = realloc(res, size_arr * sizeof(int));
+          res[size_arr-1] = count;
+          break;
+    }
+  }
+    return res;
+}
