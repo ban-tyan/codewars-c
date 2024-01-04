@@ -1,0 +1,18 @@
+#include <string.h>
+ 
+/* remember to null-terminate outp! */
+ 
+char *get_middle(char outp[3], const char *inp)
+{
+  if (strlen(inp) % 2 == 0){
+    outp[0] = inp[(strlen(inp) - 1) / 2];
+    outp[1] = inp[(strlen(inp) - 1) / 2 + 1];
+    outp[2] = '\0';
+      }
+  else{
+    outp[0] = inp[(strlen(inp) - 1) / 2];
+    outp[1] = '\0';
+    outp[2] = '\0';
+  }
+  return outp;
+}
